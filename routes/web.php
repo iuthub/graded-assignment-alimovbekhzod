@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get("tasks", "TaskController@index")->middleware("auth");
+Route::post("tasks", "TaskController@store");
+Route::get("{taskID}/edit", "TaskController@edit");
+Route::patch("tasks/{taskID}", "TaskController@update");
+Route::get("delete/{task}", "TaskController@delete");
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
